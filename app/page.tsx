@@ -1,101 +1,111 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+
+// Array of titles for dynamic text
+const titles = [
+  "Guy-who-loves-Coffee.tsx",
+  "Code-enthusiast.tsx",
+  "Creative-thinker.tsx",
+  "Front-end Developer.tsx",
+];
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [currentTitleIndex, setCurrentTitleIndex] = useState(0); // Index of the current title
+  const [currentText, setCurrentText] = useState(""); // The text being typed
+  const [isDeleting, setIsDeleting] = useState(false); // Whether we're deleting the text
+  const [typingSpeed, setTypingSpeed] = useState(150); // Speed of typing
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  // Function to handle the typing effect
+  useEffect(() => {
+    const currentTitle = titles[currentTitleIndex]; // Get the current title from the array
+
+    // Handle the typing and deleting effect
+    if (!isDeleting && currentText.length < currentTitle.length) {
+      // If not deleting and there's still more text to type, type a character
+      setTimeout(() => {
+        setCurrentText(currentTitle.substring(0, currentText.length + 1));
+      }, typingSpeed);
+    } else if (isDeleting && currentText.length > 0) {
+      // If deleting, remove a character
+      setTimeout(() => {
+        setCurrentText(currentTitle.substring(0, currentText.length - 1));
+      }, typingSpeed);
+    } else if (!isDeleting && currentText.length === currentTitle.length) {
+      // Once the typing of the full text is done, start deleting after a pause
+      setTimeout(() => setIsDeleting(true), 1000);
+    } else if (isDeleting && currentText.length === 0) {
+      // When the text is fully deleted, move to the next title
+      setIsDeleting(false);
+      setCurrentTitleIndex((prevIndex) => (prevIndex + 1) % titles.length);
+    }
+  }, [currentText, isDeleting, currentTitleIndex, typingSpeed]);
+
+  return (
+    <div className="bg-black min-h-screen flex flex-col items-center">
+      {/* Big Circle */}
+      <motion.div
+        className="relative flex items-center justify-center border border-yellow rounded-full w-[600px] h-[600px] mt-16"
+        initial={{ scale: 1, backgroundColor: "#000" }}
+        animate={{
+          scale: [1, 1.05, 1],
+          backgroundColor: ["#000", "#222", "#000"],
+        }}
+        transition={{
+          duration: 3,
+          ease: "easeInOut",
+          repeat: Infinity,
+          repeatType: "loop",
+        }}
+      ></motion.div>
+      {/* Container for Circle Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
+        {/* Job Title and Experience */}
+        <motion.div
+          className="text-center mb-4"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <h2 className="text-gray-400 text-sm uppercase">Software Engineer</h2>
+        </motion.div>
+
+        {/* Dynamic Typing Text */}
+        <motion.div
+          className="text-center mb-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <h1 className="text-white text-2xl font-bold">
+            {currentText}
+            <span className="text-yellow">|</span> {/* Cursor effect */}
+          </h1>
+        </motion.div>
+
+        {/* Section Links */}
+        <motion.div
+          className="flex space-x-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <Link href="/about" className="text-gray-400 text-xs hover:text-yellow">
+            About
+          </Link>
+          <Link href="/experience" className="text-gray-400 text-xs hover:text-yellow">
+            Experience
+          </Link>
+          <Link href="/skills" className="text-gray-400 text-xs hover:text-yellow">
+            Skills
+          </Link>
+          <Link href="/projects" className="text-gray-400 text-xs hover:text-yellow">
+            Projects
+          </Link>
+        </motion.div>
+      </div>
     </div>
   );
 }
