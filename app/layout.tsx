@@ -65,9 +65,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         <main>{children}</main>
 
-        <footer className="p-4 text-center text-yellow">
+        {/* <footer className="p-4 text-center text-yellow">
           © {new Date().getFullYear()} My Portfolio
-        </footer>
+        </footer> */}
       </body>
     </html>
   );

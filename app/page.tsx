@@ -44,67 +44,58 @@ export default function Home() {
   }, [currentText, isDeleting, currentTitleIndex, typingSpeed]);
 
   return (
-    <div className="bg-black min-h-screen flex flex-col items-center">
-      {/* Big Circle */}
-      <motion.div
-        className="relative flex items-center justify-center border border-yellow rounded-full w-[600px] h-[600px] mt-16"
-        initial={{ scale: 1, backgroundColor: "#000" }}
-        animate={{
-          scale: [1, 1.05, 1],
-          backgroundColor: ["#000", "#222", "#000"],
-        }}
-        transition={{
-          duration: 3,
-          ease: "easeInOut",
-          repeat: Infinity,
-          repeatType: "loop",
-        }}
-      ></motion.div>
-      {/* Container for Circle Content */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-        {/* Job Title and Experience */}
-        <motion.div
-          className="text-center mb-4"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <h2 className="text-gray-400 text-sm uppercase">Software Engineer</h2>
-        </motion.div>
+    <div className="min-h-screen bg-cover bg-center bg-fixed flex items-center justify-center px-4"
+    style={{ backgroundImage: "url('/images/bg.jpg')" }}>
+      <div className="flex items-center justify-between w-full max-w-screen-xl relative">
 
-        {/* Dynamic Typing Text */}
-        <motion.div
-          className="text-center mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <h1 className="text-white text-2xl font-bold">
-            {currentText}
-            <span className="text-yellow">|</span> {/* Cursor effect */}
-          </h1>
-        </motion.div>
+        {/* Container for Circle Content */}
+        <div className="relative z-10 flex flex-col items-start ml-[620px] space-y-6">
+          {/* Job Title and Experience */}
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h2 className="text-gray-400 text-lg uppercase font-light tracking-widest">
+              Software Engineer
+            </h2>
+          </motion.div>
 
-        {/* Section Links */}
-        <motion.div
-          className="flex space-x-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <Link href="/about" className="text-gray-400 text-xs hover:text-yellow">
-            About
-          </Link>
-          <Link href="/experience" className="text-gray-400 text-xs hover:text-yellow">
-            Experience
-          </Link>
-          <Link href="/skills" className="text-gray-400 text-xs hover:text-yellow">
-            Skills
-          </Link>
-          <Link href="/projects" className="text-gray-400 text-xs hover:text-yellow">
-            Projects
-          </Link>
-        </motion.div>
+          {/* Dynamic Typing Text */}
+          <motion.div
+            className="text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h1 className="text-white text-4xl font-extrabold">
+              {currentText}
+              <span className="text-yellow">|</span> {/* Cursor effect */}
+            </h1>
+          </motion.div>
+
+          {/* Section Links */}
+          <motion.div
+            className="flex space-x-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <Link href="/about" className="text-gray-400 text-sm hover:text-yellow transition duration-300">
+              About
+            </Link>
+            <Link href="/experience" className="text-gray-400 text-sm hover:text-yellow transition duration-300">
+              Experience
+            </Link>
+            <Link href="/skills" className="text-gray-400 text-sm hover:text-yellow transition duration-300">
+              Skills
+            </Link>
+            <Link href="/projects" className="text-gray-400 text-sm hover:text-yellow transition duration-300">
+              Projects
+            </Link>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

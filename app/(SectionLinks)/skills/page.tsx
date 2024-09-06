@@ -40,7 +40,8 @@ const skillsData: {
 
 const Skills = () => {
   return (
-    <div className="min-h-screen bg-gray-800 flex flex-col items-center justify-center p-8">
+    <div className="min-h-screen bg-cover bg-center bg-fixed flex flex-col items-center justify-center p-8"
+    style={{ backgroundImage: "url('/images/bg.jpg')" }}>
       <h2 className="text-yellow text-4xl mb-8">Skills</h2>
       {/* Loop through skill categories */}
       {Object.keys(skillsData).map((category) => (
