@@ -15,10 +15,11 @@ const config: Config = {
         white: '#ffffff',
       },
       fontFamily: {
-        sans: ['Roboto', 'sans-serif'],
+        sans: ['Roboto'], // Set Roboto as default sans-serif font
       },
     },
   },
   plugins: [],
 };
+
 export default config;

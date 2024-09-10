@@ -57,7 +57,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             animate="visible"
             variants={iconVariants}
           >
-            <a href="mailto:your-email@example.com" aria-label="Email" className="text-yellow w-6 h-6 hover:text-white">
+            <a href="mailto:kamartivaishnav@gmail.com" aria-label="Email" className="text-yellow w-6 h-6 hover:text-white">
               <FaEnvelope />
             </a>
           </motion.div>

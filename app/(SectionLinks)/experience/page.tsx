@@ -6,17 +6,17 @@ import { motion } from 'framer-motion';
 const experiences = [
   {
     id: 1,
-    logo: '/path-to-logo1.png', // Replace with company logos
-    companyName: 'Company A',
-    jobPosition: 'Frontend Developer',
-    dateRange: 'Jan 2020 - Dec 2021',
+    logo: '/images/MAQsoftware.png',
+    companyName: 'MAQ Software',
+    jobPosition: 'Associate Software Engineer',
+    dateRange: 'Jan 2024 - July 2024',
   },
   {
     id: 2,
-    logo: '/path-to-logo2.png',
-    companyName: 'Company B',
-    jobPosition: 'Full Stack Developer',
-    dateRange: 'Feb 2022 - Present',
+    logo: '/images/MAQsoftware.png',
+    companyName: 'MAQ Software',
+    jobPosition: 'Software Engineer 1',
+    dateRange: 'July 2024 - Present',
   },
   // Add more experiences as needed
 ];
@@ -56,7 +56,7 @@ const Experience = () => {
               <img
                 src={experience.logo}
                 alt={`${experience.companyName} logo`}
-                className="w-16 h-16 mx-auto mb-4 rounded-full object-cover"
+                className="mx-auto mb-4 object-cover"
               />
 
               {/* Company Name and Position */}

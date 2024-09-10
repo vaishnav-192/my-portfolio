@@ -11,30 +11,39 @@ interface Skill {
 
 // Define the structure of the skillsData object
 const skillsData: {
-  Backend: Skill[];
-  Frontend: Skill[];
+  Languages: Skill[];
+  Frameworks: Skill[];
   Database: Skill[];
-  CI_CD: Skill[];
+  DeveloperTools: Skill[];
 } = {
-  Backend: [
-    { name: "Node.js", src: "/images/nodejs.svg" },
+  Languages: [
+    { name: "C/C++", src: "/images/c++.png" },
+    { name: "JavaScript", src: "/images/JavaScript.png" },
     { name: "Python", src: "/images/python.svg" },
-    { name: "Django", src: "/images/django.svg" },
+    { name: "Java", src: "/images/java.png" },
+    { name: "C#", src: "/images/cSharp.png" },
   ],
-  Frontend: [
+  Frameworks: [
+    { name: "Node Js", src: "/images/nodejs.svg" },
+    { name: "Express Js", src: "/images/ExpressJS.png" },
     { name: "React", src: "/images/react.svg" },
-    { name: "Angular", src: "/images/angular.svg" },
-    { name: "Tailwind CSS", src: "/images/tailwind.png" },
+    { name: "Dot Net", src: "/images/dotnet.png" },
   ],
   Database: [
     { name: "MySQL", src: "/images/mysql.svg" },
-    { name: "MongoDB", src: "/images/mongodb.svg" },
-    { name: "PostgreSQL", src: "/images/postgresql.svg" },
+    { name: "MongoDB", src: "/images/mongodb.png" },
+    { name: "PostgreSQL", src: "/images/postgresql.png" },
+    { name: "Redis", src: "/images/Redis.png" },
+    { name: "PySpark", src: "/images/PySpark.png" },
   ],
-  CI_CD: [
-    { name: "Jenkins", src: "/images/jenkins.svg" },
+  DeveloperTools: [
     { name: "GitHub Actions", src: "/images/github.png" },
+    { name: "Azure Data Factory", src: "/images/Azure.png" },
     { name: "Docker", src: "/images/Docker.png" },
+    { name: "Power BI", src: "/images/Powerbi.png" },
+    { name: "REST API", src: "/images/RESTapi.png" },
+    { name: "Blockchain", src: "/images/blockchain.png" },
+    { name: "Kafka", src: "/images/kafka.png" },
   ],
 };
 
