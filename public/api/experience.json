@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "logo": "/images/MAQsoftware.png",
+      "companyName": "MAQ Software",
+      "jobPosition": "Associate Software Engineer",
+      "dateRange": "Jan 2024 - July 2024"
+    },
+    {
+      "id": 2,
+      "logo": "/images/MAQsoftware.png",
+      "companyName": "MAQ Software",
+      "jobPosition": "Software Engineer 1",
+      "dateRange": "July 2024 - Present"
+    }
+  ]
+  

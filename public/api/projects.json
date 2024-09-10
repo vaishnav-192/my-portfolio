@@ -1,0 +1,73 @@
+[
+    {
+        "id": 1,
+        "image": "/images/Bnetwork.png",
+        "techStack": [
+            "Javascript",
+            "Node.Js",
+            "Express.Js",
+            "Redis",
+            "Postman",
+            "Git"
+        ],
+        "description": [
+            "Built a real-time pub/sub-messaging platform. Enables secure peer-to-peer data exchange using a decentralized blockchain network.",
+            "Leveraged blockchain for secure and immutable data storage. This ensures trust and transparency on the blockchain.",
+            "Integrated monitoring tools. Facilitates real-time visualization and performance monitoring of the blockchain network."
+        ],
+        "name": "Connect Chain"
+    },
+    {
+        "id": 2,
+        "image": "/images/bPal.png",
+        "techStack": [
+            "Javascript",
+            "Node.Js",
+            "Express.Js",
+            "React",
+            "HTML",
+            "CSS",
+            "Web3",
+            "Metamask",
+            "Git"
+        ],
+        "description": [
+            "Implemented a secure smart contract on Polygon Testnet for transparent and immutable transactions. This ensures trust and traceability by storing transaction history permanently on the blockchain, accessible to all participants.",
+            "Enhanced user experience by enabling interaction with Metamask wallet. This allows users to manage their funds securely and conveniently within the application, promoting a familiar and streamlined experience."
+        ],
+        "name": "BlockPal"
+    },
+    {
+        "id": 3,
+        "image": "/images/webCrawler.png",
+        "techStack": [
+            "Go",
+            "Redis",
+            "HTML",
+            "CSS",
+            "Git"
+        ],
+        "description": [
+            "Developed scalable web scraping app. Supports paid and free tiers with rate limiting for scraping speed and concurrency.",
+            "Implemented tiered scraping plans. Paid users enjoy faster scraping capabilities compared to the free tier."
+        ],
+        "name": "WebScrapper"
+    },
+    {
+        "id": 4,
+        "image": "/images/chat.png",
+        "techStack": [
+            "Go",
+            "Redis",
+            "HTML",
+            "CSS",
+            "Git"
+        ],
+        "description": [
+            "A real-time chat application where users can communicate with each other.",
+            "React and JavaScript for building the user interface, Firebase provides the backend infrastructure and real-time data synchronization.",
+            "The app includes features such as user authentication, chat room creation, and messaging functionality"
+        ],
+        "name": "LogMessenger"
+    }
+]
