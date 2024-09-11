@@ -48,7 +48,12 @@ export default function Home() {
   useEffect(() => {
     controls.start({
       opacity: [1, 0],
-      transition: { duration: 1, ease: "easeOut" },
+      transition: {
+        duration: 4,
+        ease: "easeOut",
+        repeat: Infinity, // Repeat the animation infinitely
+        repeatType: "reverse", // Ensure the animation loops back
+      },
     });
   }, [controls]);
 

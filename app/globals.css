@@ -31,10 +31,6 @@ body {
 }
 
 
-/* Cube styles */
-
-/* global.css */
-
 /* Cube grid container */
 .cube {
   position: relative;
@@ -69,12 +65,6 @@ body {
 
 .cube {
   animation: rotation 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-}
-
-@keyframes color {
-  100% {
-    background-color: #fff;
-  }
 }
 
 .wall {
