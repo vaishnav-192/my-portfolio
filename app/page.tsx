@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
@@ -17,6 +17,7 @@ export default function Home() {
   const [currentText, setCurrentText] = useState(""); // The text being typed
   const [isDeleting, setIsDeleting] = useState(false); // Whether we're deleting the text
   const [typingSpeed, setTypingSpeed] = useState(150); // Speed of typing
+  const controls = useAnimation(); // Framer Motion animation controls
 
   // Function to handle the typing effect
   useEffect(() => {
@@ -43,13 +44,49 @@ export default function Home() {
     }
   }, [currentText, isDeleting, currentTitleIndex, typingSpeed]);
 
-  return (
-    <div className="min-h-screen bg-cover bg-center bg-fixed flex items-center justify-center px-4"
-    style={{ backgroundImage: "url('/images/bg.jpg')" }}>
-      <div className="flex items-center justify-between w-full max-w-screen-xl relative">
+  // Animation control for easing out transparency
+  useEffect(() => {
+    controls.start({
+      opacity: [1, 0],
+      transition: { duration: 1, ease: "easeOut" },
+    });
+  }, [controls]);
 
-        {/* Container for Circle Content */}
-        <div className="relative z-10 flex flex-col items-start ml-[620px] space-y-6">
+  return (
+    <div
+      className="min-h-screen bg-cover bg-center bg-fixed flex items-center justify-center px-4"
+      style={{ backgroundImage: "url('/images/bg.jpg')" }}
+    >
+      <div className="flex items-center justify-between w-full max-w-screen-xl relative">
+        {/* Cube Animation (Left Side) */}
+        <div className="relative w-1/2 flex items-center justify-center">
+          <motion.div
+            className="flex flex-wrap z-10" // Cube container size
+            initial={{ opacity: 1 }}
+            animate={controls}
+          >
+            {Array.from({ length: 4 }).map((_, rowIndex) => (
+              <div key={rowIndex} className="flex w-full justify-center">
+                {Array.from({ length: 4 }).map((_, cubeIndex) => (
+                  <div
+                    key={cubeIndex}
+                    className="cube w-48 h-48" // Removed mr-4 to eliminate space between cubes
+                  >
+                    <div className="wall front"></div>
+                    <div className="wall back"></div>
+                    <div className="wall left"></div>
+                    <div className="wall right"></div>
+                    <div className="wall top"></div>
+                    <div className="wall bottom"></div>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Container for Circle Content (Right Side) */}
+        <div className="relative w-1/2 flex flex-col items-start space-y-6 z-10">
           {/* Job Title and Experience */}
           <motion.div
             className="text-center"
@@ -82,16 +119,28 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            <Link href="/about" className="text-gray-400 text-sm hover:text-yellow transition duration-300">
+            <Link
+              href="/about"
+              className="text-gray-400 text-sm hover:text-yellow transition duration-300"
+            >
               About
             </Link>
-            <Link href="/experience" className="text-gray-400 text-sm hover:text-yellow transition duration-300">
+            <Link
+              href="/experience"
+              className="text-gray-400 text-sm hover:text-yellow transition duration-300"
+            >
               Experience
             </Link>
-            <Link href="/skills" className="text-gray-400 text-sm hover:text-yellow transition duration-300">
+            <Link
+              href="/skills"
+              className="text-gray-400 text-sm hover:text-yellow transition duration-300"
+            >
               Skills
             </Link>
-            <Link href="/projects" className="text-gray-400 text-sm hover:text-yellow transition duration-300">
+            <Link
+              href="/projects"
+              className="text-gray-400 text-sm hover:text-yellow transition duration-300"
+            >
               Projects
             </Link>
           </motion.div>

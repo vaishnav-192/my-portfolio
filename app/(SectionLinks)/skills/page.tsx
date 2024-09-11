@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image'
 
 interface Skill {
   name: string;
@@ -83,9 +84,12 @@ const Skills = () => {
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.3 }}
               >
-                <img
+                <Image
                   src={tech.src}
                   alt={tech.name}
+                  priority= {true}
+                  width={50}
+                  height={50}
                   className="w-full h-full object-contain p-2"
                 />
               </motion.div>

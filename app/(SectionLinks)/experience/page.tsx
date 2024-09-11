@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from 'next/image'
 
 interface ExperienceData {
   id: number;
@@ -93,9 +94,10 @@ const Experience = () => {
               }}
             >
               {/* Company Logo */}
-              <img
+              <Image
                 src={experience.logo}
                 alt={`${experience.companyName} logo`}
+                priority = {true}
                 className="mx-auto mb-4 object-cover"
               />
 
