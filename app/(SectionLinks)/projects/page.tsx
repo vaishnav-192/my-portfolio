@@ -1,12 +1,22 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { motion, PanInfo } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
+import Image from 'next/image'
+
+// Define the Project type
+interface Project {
+  id: number;
+  image: string;
+  name: string;
+  techStack: string[];
+  description: string[];
+}
 
 const Projects = () => {
-  const [projects, setProjects] = useState<any[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   // Fetch projects data from JSON file
   useEffect(() => {
@@ -43,7 +53,7 @@ const Projects = () => {
   };
 
   // Handle swipe gestures
-  const handleDragEnd = (event: any, info: { offset: { x: number } }) => {
+  const handleDragEnd = (event: MouseEvent | TouchEvent, info: PanInfo) => {
     if (info.offset.x > 100) {
       handlePrev();
     } else if (info.offset.x < -100) {
@@ -91,8 +101,9 @@ const Projects = () => {
 
       {/* Slider Container */}
       <div className="relative w-full max-w-6xl h-[500px] flex items-center justify-center">
-        {/* Left Arrow
-        <button
+        {/* Left Arrow */}
+        {/* Uncomment if needed */}
+        {/* <button
           onClick={handlePrev}
           className="absolute left-0 p-4 text-white text-3xl"
         >
@@ -112,9 +123,12 @@ const Projects = () => {
           onDragEnd={handleDragEnd}
         >
           {/* Project Image */}
-          <img
+          <Image
             src={projects[currentIndex].image}
             alt="Project Image"
+            width={150}
+            height={150}
+            priority={true}
             className="w-full max-h-64 object-contain mb-4 rounded-lg"
           />
 
@@ -122,7 +136,7 @@ const Projects = () => {
           <div className="text-white mb-4">
             <h2 className="text-xl mb-2">{projects[currentIndex].name}</h2>
             <div className="flex flex-wrap justify-center items-center">
-              {projects[currentIndex].techStack.map((tech: string, index) => (
+              {projects[currentIndex].techStack.map((tech, index) => (
                 <React.Fragment key={index}>
                   <motion.span
                     className="whitespace-nowrap"
@@ -141,7 +155,7 @@ const Projects = () => {
 
           {/* Project Description */}
           <ul className="text-white text-left list-disc pl-6">
-            {projects[currentIndex].description.map((desc: string, index) => (
+            {projects[currentIndex].description.map((desc, index) => (
               <li key={index} className="mb-2">
                 {desc}
               </li>

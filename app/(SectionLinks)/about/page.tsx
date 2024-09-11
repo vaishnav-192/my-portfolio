@@ -25,7 +25,7 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}
         >
-          Welcome to my portfolio! I'm a passionate developer with a love for
+          Welcome to my portfolio! I&apos;m a passionate developer with a love for
           creating beautiful and functional web applications. My journey in tech
           has led me to explore various frameworks and technologies, and I enjoy
           the challenge of solving complex problems. Take a look around to learn

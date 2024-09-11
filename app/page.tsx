@@ -16,7 +16,7 @@ export default function Home() {
   const [currentTitleIndex, setCurrentTitleIndex] = useState(0); // Index of the current title
   const [currentText, setCurrentText] = useState(""); // The text being typed
   const [isDeleting, setIsDeleting] = useState(false); // Whether we're deleting the text
-  const [typingSpeed, setTypingSpeed] = useState(150); // Speed of typing
+  const [typingSpeed] = useState(150); // Speed of typing
   const controls = useAnimation(); // Framer Motion animation controls
 
   // Function to handle the typing effect
