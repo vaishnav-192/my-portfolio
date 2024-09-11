@@ -52,7 +52,7 @@ export default function Home() {
         duration: 4,
         ease: "easeOut",
         repeat: Infinity, // Repeat the animation infinitely
-        repeatType: "reverse", // Ensure the animation loops back
+        repeatType: "loop", // Ensure the animation loops back
       },
     });
   }, [controls]);

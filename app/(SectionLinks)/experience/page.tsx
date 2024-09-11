@@ -98,13 +98,15 @@ const Experience = () => {
                 src={experience.logo}
                 alt={`${experience.companyName} logo`}
                 priority = {true}
+                width={200}
+                height={200}
                 className="mx-auto mb-4 object-cover"
               />
 
-              {/* Company Name and Position */}
+              {/* Company Name and Position
               <h2 className="text-2xl font-semibold mb-2">
                 {experience.companyName}
-              </h2>
+              </h2> */}
               <p className="text-lg text-yellow mb-2">
                 {experience.jobPosition}
               </p>
