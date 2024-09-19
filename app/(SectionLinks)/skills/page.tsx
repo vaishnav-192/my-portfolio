@@ -1,7 +1,8 @@
+"use client"
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
-import AnimatedHeading from '../animateHeading';
+import Image from 'next/image'
 
 interface Skill {
   name: string;
@@ -15,7 +16,7 @@ interface SkillsData {
   DeveloperTools: Skill[];
 }
 
-const Skills = ({ skillsInView }: { skillsInView: boolean }) => {
+const Skills = () => {
   const [skillsData, setSkillsData] = useState<SkillsData | null>(null);
 
   // Fetch skills data from JSON file
@@ -37,17 +38,38 @@ const Skills = ({ skillsInView }: { skillsInView: boolean }) => {
     return <div>Loading skills...</div>; // Loading state while data is being fetched
   }
 
+  // Animation variants for each letter
+  const letterAnimation = {
+    initial: { opacity: 0, y: 50 },
+    animate: { opacity: 1, y: 0 },
+    transition: { type: "spring", stiffness: 500, damping: 20 },
+  };
+
   return (
-    <div className="flex flex-col items-center">
+    <div
+      className="min-h-screen bg-cover bg-center bg-fixed flex flex-col items-center justify-center p-8"
+      style={{ backgroundImage: "url('/images/bg.jpg')" }}
+    >
       {/* Heading with fancy styling and animation */}
       <motion.h2
         className="text-6xl font-bold text-white mb-8 flex space-x-10"
-        initial={{ opacity: 0, y: 50 }} // Initial state when out of view
-        animate={skillsInView ? { opacity: 1, y: 0 } : {}} // Animate only when in view
-        transition={{ duration: 0.7 }} // Animation duration
+        style={{
+          textShadow: '4px 4px 10px rgba(0, 0, 0, 0.8)', // Adds depth to the text
+        }}
       >
         {/* Animate each letter separately for a cool effect */}
-        <AnimatedHeading text="SKILLS" inView={skillsInView} />
+        {'SKILLS'.split('').map((letter, index) => (
+          <motion.span
+            key={index}
+            className="text-yellow"
+            initial="initial"
+            animate="animate"
+            variants={letterAnimation}
+            transition={{ delay: index * 0.1 }} // Slight delay for each letter
+          >
+            {letter}
+          </motion.span>
+        ))}
       </motion.h2>
 
       {/* Skills section */}
@@ -65,7 +87,7 @@ const Skills = ({ skillsInView }: { skillsInView: boolean }) => {
                 <Image
                   src={tech.src}
                   alt={tech.name}
-                  priority={true}
+                  priority= {true}
                   width={50}
                   height={50}
                   className="w-full h-full object-contain p-2"
