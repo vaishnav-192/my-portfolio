@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, PanInfo } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
-import Image from 'next/image'
+import Image from "next/image";
+import AnimatedHeading from "../animateHeading";
 
 // Define the Project type
 interface Project {
@@ -14,7 +15,7 @@ interface Project {
   description: string[];
 }
 
-const Projects = () => {
+const Projects = ({ projectsInView }: { projectsInView: boolean }) => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
@@ -65,51 +66,26 @@ const Projects = () => {
     return <div>Loading projects...</div>;
   }
 
-  // Animation variants for each letter
-  const letterAnimation = {
-    initial: { opacity: 0, y: 50 },
-    animate: { opacity: 1, y: 0 },
-    transition: { type: "spring", stiffness: 500, damping: 20 },
-  };
-
   return (
-    <div
-      className="bg-cover bg-center bg-fixed text-yellow p-8 h-screen flex items-center justify-center relative"
-      style={{ backgroundImage: "url('/images/bg.jpg')" }}
-    >
-      {/* Heading with fancy styling and animation */}
+    <div className="bg-cover bg-center bg-fixed text-yellow p-8 min-h-screen flex flex-col items-center justify-start"
+      // style={{ backgroundImage: "url('/images/bg.jpg')" }}
+      >
+      {/* Heading */}
       <motion.h2
         className="text-6xl font-bold text-white mb-8 flex space-x-10"
+        initial={{ opacity: 0, y: 50 }} // Initial state when out of view
+        animate={projectsInView ? { opacity: 1, y: 0 } : {}} // Animate only when in view
+        transition={{ duration: 0.7 }} // Animation duration
         style={{
-          textShadow: '4px 4px 10px rgba(0, 0, 0, 0.8)', // Adds depth to the text
+          textShadow: "4px 4px 10px rgba(0, 0, 0, 0.8)",
         }}
       >
         {/* Animate each letter separately for a cool effect */}
-        {'PROJECTS'.split('').map((letter, index) => (
-          <motion.span
-            key={index}
-            className="text-yellow"
-            initial="initial"
-            animate="animate"
-            variants={letterAnimation}
-            transition={{ delay: index * 0.1 }} // Slight delay for each letter
-          >
-            {letter}
-          </motion.span>
-        ))}
+        <AnimatedHeading text="PROJECTS" inView={projectsInView} />
       </motion.h2>
 
       {/* Slider Container */}
-      <div className="relative w-full max-w-6xl h-[500px] flex items-center justify-center">
-        {/* Left Arrow */}
-        {/* Uncomment if needed */}
-        {/* <button
-          onClick={handlePrev}
-          className="absolute left-0 p-4 text-white text-3xl"
-        >
-          <FaArrowLeft />
-        </button> */}
-
+      <div className="relative w-full max-w-6xl h-auto flex flex-col items-center justify-center">
         {/* Slide with Glass Effect and Swipe Gesture Support */}
         <motion.div
           key={projects[currentIndex].id}
@@ -163,10 +139,10 @@ const Projects = () => {
           </ul>
         </motion.div>
 
-        {/* Right Arrow */}
+        {/* Navigation Buttons */}
         <button
           onClick={handleNext}
-          className="absolute right-0 p-4 text-white text-3xl"
+          className="absolute right-0 p-4 text-white text-3xl top-1/2 transform -translate-y-1/2"
         >
           <FaArrowRight />
         </button>

@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import Image from 'next/image'
+import Image from "next/image";
+import AnimatedHeading from "../animateHeading";
 
 interface ExperienceData {
   id: number;
@@ -12,7 +13,11 @@ interface ExperienceData {
   dateRange: string;
 }
 
-const Experience = () => {
+interface ExperienceProps {
+  experienceInView: boolean;
+}
+
+const Experience: React.FC<ExperienceProps> = ({ experienceInView }) => {
   const [experiences, setExperiences] = useState<ExperienceData[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -32,13 +37,6 @@ const Experience = () => {
     fetchExperiences();
   }, []);
 
-  // Animation variants for each letter
-  const letterAnimation = {
-    initial: { opacity: 0, y: 50 },
-    animate: { opacity: 1, y: 0 },
-    transition: { type: "spring", stiffness: 500, damping: 20 },
-  };
-
   if (loading) {
     return <div>Loading experiences...</div>; // Loading state while fetching data
   }
@@ -46,7 +44,7 @@ const Experience = () => {
   return (
     <div
       className="min-h-screen bg-cover bg-center bg-fixed flex flex-col items-center justify-center p-8"
-      style={{ backgroundImage: "url('/images/bg.jpg')" }}
+      // style={{ backgroundImage: "url('/images/bg.jpg')" }}
     >
       {/* Heading with fancy styling and animation */}
       <motion.h2
@@ -54,20 +52,12 @@ const Experience = () => {
         style={{
           textShadow: "4px 4px 10px rgba(0, 0, 0, 0.8)", // Adds depth to the text
         }}
+        initial={{ opacity: 0, y: 50 }} // Initial state when out of view
+        animate={experienceInView ? { opacity: 1, y: 0 } : {}} // Animate only when in view
+        transition={{ duration: 0.7 }} // Animation duration
       >
         {/* Animate each letter separately for a cool effect */}
-        {"EXPERIENCE".split("").map((letter, index) => (
-          <motion.span
-            key={index}
-            className="text-yellow"
-            initial="initial"
-            animate="animate"
-            variants={letterAnimation}
-            transition={{ delay: index * 0.1 }} // Slight delay for each letter
-          >
-            {letter}
-          </motion.span>
-        ))}
+        <AnimatedHeading text="EXPERIENCE" inView={experienceInView} />
       </motion.h2>
 
       {/* Timeline container */}
@@ -81,7 +71,10 @@ const Experience = () => {
               index % 2 === 0 ? "md:flex-row-reverse" : "md:flex-row"
             } relative`}
             initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{
+              opacity: experienceInView ? 1 : 0,
+              y: experienceInView ? 0 : 50,
+            }}
             transition={{ duration: 0.5, ease: "easeOut" }}
             whileHover={{ scale: 1.1 }}
           >
@@ -97,16 +90,13 @@ const Experience = () => {
               <Image
                 src={experience.logo}
                 alt={`${experience.companyName} logo`}
-                priority = {true}
+                priority={true}
                 width={200}
                 height={200}
                 className="mx-auto mb-4 object-cover"
               />
 
-              {/* Company Name and Position
-              <h2 className="text-2xl font-semibold mb-2">
-                {experience.companyName}
-              </h2> */}
+              {/* Job Position */}
               <p className="text-lg text-yellow mb-2">
                 {experience.jobPosition}
               </p>
